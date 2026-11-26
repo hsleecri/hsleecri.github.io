@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hyeonsu Lee</title>
+<meta name="description" content="Hyeonsu Lee, Ph.D. student in Industrial & Systems Engineering at Texas A&M University. Machine learning for manufacturing systems and metal additive manufacturing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: masthead (name, links, portrait); below it each section is a row with a narrow label rail and a ~46rem reading column. Rows stack to one column under 760px. */
+:root {
+  --bg: #F7F6F5;
+  --surface: #FFFFFF;
+  --fg: #1B1918;
+  --muted: #645E5B;
+  --rule: #E3DFDC;
+  --accent: #500000;
+  --accent-wash: #F2E8E7;
+  --photo-filter: none;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --step--2: 0.75rem;
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: 1.375rem;
+  --step-4: clamp(2.5rem, 4.5vw + 1rem, 3.75rem);
+  --row-gap: clamp(2.25rem, 5vw, 3.5rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141212;
+    --surface: #1C1A19;
+    --fg: #ECE8E6;
+    --muted: #A69F9C;
+    --rule: #322E2D;
+    --accent: #EBA295;
+    --accent-wash: #2C1E1C;
+    --photo-filter: brightness(0.86);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141212;
+  --surface: #1C1A19;
+  --fg: #ECE8E6;
+  --muted: #A69F9C;
+  --rule: #322E2D;
+  --accent: #EBA295;
+  --accent-wash: #2C1E1C;
+  --photo-filter: brightness(0.86);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 var(--step-0)/1.65 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+h1, h2, h3 { text-wrap: balance; }
+p { margin: 0; }
+
+.wrap {
+  max-width: 66rem;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  padding-block: 1.25rem 0;
+  font: 500 var(--step--1)/1.4 var(--font-body);
+}
+.topbar .mark { color: var(--fg); text-decoration: none; letter-spacing: 0.02em; }
+.topbar nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; list-style: none; margin: 0; padding: 0; }
+.topbar nav a { color: var(--muted); text-decoration: none; }
+.topbar nav a:hover { color: var(--accent); }
+.topbar nav li { display: flex; align-items: center; }
+.theme-toggle {
+  font: inherit;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.theme-toggle svg { flex: none; }
+
+/* Masthead */
+.masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem 2.5rem;
+  align-items: end;
+  padding-block: clamp(2.25rem, 6vw, 4rem) 1.75rem;
+}
+.eyebrow {
+  font: 500 var(--step--2)/1.5 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--accent);
+}
+.masthead h1 {
+  margin: 0.6rem 0 0.9rem;
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-stretch: 106%;
+  font-size: var(--step-4);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+.lede { font-size: var(--step-1); max-width: 38rem; }
+.affil { margin-top: 0.75rem; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
+.affil a { color: var(--fg); }
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.25rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--step--1);
+}
+.contact a { color: var(--fg); font-weight: 500; text-decoration-color: var(--accent); }
+.email { display: inline-flex; align-items: center; gap: 0.5rem; }
+.email code { font: 500 var(--step--1)/1 var(--font-mono); }
+.copy {
+  font: 500 var(--step--2)/1 var(--font-mono);
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.3rem 0.45rem;
+  cursor: pointer;
+}
+.copy:hover { color: var(--accent); border-color: var(--accent); }
+a[data-todo] { text-decoration-style: dashed; color: var(--muted); }
+.portrait {
+  width: 9rem;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--rule);
+  max-width: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--accent-wash);
+  color: var(--accent);
+  font: 700 2.4rem/1 var(--font-display);
+  font-stretch: 116%;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.portrait img { width: 100%; height: 100%; object-fit: cover; display: block; filter: var(--photo-filter); }
+
+/* Section rows */
+.row {
+  display: grid;
+  grid-template-columns: 10rem minmax(0, 1fr);
+  gap: 1rem 2.5rem;
+  padding-block: var(--row-gap);
+  border-top: 1px solid var(--rule);
+}
+.row > h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: 104%;
+  font-size: var(--step-2);
+  line-height: 1.15;
+}
+.row > h2 .count {
+  display: block;
+  margin-top: 0.35rem;
+  font: 500 var(--step--2)/1 var(--font-mono);
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.count-list span { display: block; }
+.count-list span + span { margin-top: 0.2rem; }
+.row-body { min-width: 0; max-width: 46rem; display: grid; gap: 1.1rem; }
+
+/* About */
+.interests {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 2rem;
+  margin-top: 0.6rem;
+  padding: 1.1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+.label {
+  margin: 0 0 0.4rem;
+  font: 600 var(--step--2)/1.3 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+}
+.interests ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.15rem; }
+
+/* Research themes */
+.theme h3 { margin: 0 0 0.35rem; font-size: var(--step-1); font-weight: 600; line-height: 1.35; }
+.theme + .theme { padding-top: 1.1rem; border-top: 1px dashed var(--rule); }
+.theme-points { margin: 0; padding-left: 1.15rem; display: grid; gap: 0.2rem; }
+.theme-points li::marker { color: var(--accent); }
+.related { margin-top: 0.55rem; font-size: var(--step--1); color: var(--muted); }
+.related a { color: var(--fg); text-decoration-color: var(--accent); }
+
+/* Publications */
+.legend { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font: 400 var(--step--2)/1.5 var(--font-mono); color: var(--muted); }
+.legend sup, .authors sup { font: 600 0.85em/0 var(--font-mono); color: var(--accent); vertical-align: super; }
+.legend sup { margin-right: 0.35em; }
+.authors sup[data-tip] { position: relative; cursor: help; outline-offset: 1px; }
+.authors sup[data-tip]:hover::after,
+.authors sup[data-tip]:focus::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.35rem);
+  width: max-content;
+  max-width: 14rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  background: var(--fg);
+  color: var(--bg);
+  font: 500 0.75rem/1.3 var(--font-body);
+  letter-spacing: 0;
+  white-space: normal;
+  z-index: 5;
+  pointer-events: none;
+}
+.group {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0.9rem 0 0;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  font: 600 var(--step--2)/1.3 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+}
+.group span { font-variant-numeric: tabular-nums; }
+.pubs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6rem; }
+.pub { scroll-margin-top: 1.5rem; }
+.pub:target .pub-title { background: var(--accent-wash); box-shadow: 0 0 0 4px var(--accent-wash); }
+.pub-title { font-weight: 600; font-size: 1.0625rem; line-height: 1.42; text-wrap: pretty; }
+.pub-title a { color: inherit; text-decoration: none; }
+.pub-title a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1px; }
+.authors { margin-top: 0.2rem; color: var(--muted); font-size: var(--step--1); }
+.authors b, .dated .where b { color: var(--accent); font-weight: 600; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; margin-top: 0.5rem; font-size: var(--step--1); }
+.venue { font-style: italic; }
+.chip {
+  font: 500 var(--step--2)/1 var(--font-mono);
+  padding: 0.3rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: var(--accent);
+  text-decoration: none;
+  background: var(--accent-wash);
+}
+.chip:hover { border-color: var(--accent); }
+.chip[data-todo] { border-style: dashed; background: transparent; color: var(--muted); }
+.award { display: flex; flex-wrap: wrap; gap: 0.2rem 0.6rem; align-items: baseline; width: fit-content; max-width: 100%; margin-top: 0.6rem; padding: 0.35rem 0.65rem; border-radius: 3px; background: var(--accent-wash); font-size: var(--step--1); }
+.award .tag {
+  font: 600 0.6875rem/1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+}
+
+/* Dated lists */
+.dated { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+.dated > li { display: grid; grid-template-columns: minmax(0, 1fr) 7rem; gap: 0.25rem 1.5rem; }
+.yr { order: 2; text-align: right; font: 500 var(--step--1)/1.6 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--muted); }
+.dated .what { font-weight: 600; line-height: 1.42; }
+.dated .where { color: var(--muted); font-size: var(--step--1); }
+
+footer.wrap {
+  padding-block: 1.5rem 2.5rem;
+  border-top: 1px solid var(--rule);
+  font: 400 var(--step--1)/1.5 var(--font-body);
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .row > h2 .count { display: inline; margin: 0 0 0 0.5rem; }
+  .row > h2 .count-list { display: block; margin: 0.4rem 0 0; }
+  .count-list span { display: inline; }
+  .count-list span + span { margin-top: 0; }
+  .count-list span + span::before { content: " · "; }
+}
+@media (max-width: 560px) {
+  .masthead { grid-template-columns: minmax(0, 1fr); }
+  .portrait { order: -1; width: 6rem; }
+  .interests { grid-template-columns: minmax(0, 1fr); }
+  .dated > li { grid-template-columns: minmax(0, 1fr); }
+  .yr { order: 0; text-align: left; }
+  .authors { position: relative; }
+  .authors sup[data-tip] { position: static; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+</style>
+<script>
+try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+</head>
+<body>
+<div class="wrap topbar">
+  <a class="mark" href="#about">H. Lee</a>
+  <nav aria-label="Sections">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#presentations">Presentations</a></li>
+      <li><a href="#honors">Awards</a></li>
+      <li><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+        <span class="to-dark"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M13.5 9.8A5.5 5.5 0 0 1 6.2 2.5a5.5 5.5 0 1 0 7.3 7.3Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Dark</span>
+        <span class="to-light" hidden><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1v1.8M8 13.2V15M1 8h1.8M13.2 8H15M3 3l1.3 1.3M11.7 11.7 13 13M3 13l1.3-1.3M11.7 4.3 13 3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Light</span>
+      </button></li>
+    </ul>
+  </nav>
+</div>
+
+<header class="wrap masthead">
+  <div>
+    <p class="eyebrow">Ph.D. Student · Texas A&amp;M University</p>
+    <h1>Hyeonsu Lee</h1>
+    <p class="lede">Machine learning for real-world manufacturing systems</p>
+    <p class="affil"><a href="https://engineering.tamu.edu/industrial/index.html">Wm Michael Barnes ’64 Department of Industrial &amp; Systems Engineering</a><br><a href="https://www.jihoonjeong.com/home">Jeong Research Group</a></p>
+    <ul class="contact">
+      <li class="email"><code id="email-text">hslee[at]tamu[dot]edu</code><button class="copy" id="copy-email" type="button">Copy</button></li>
+      <!-- CV link hidden until the updated cv.pdf is added: <li><a href="cv.pdf">CV</a></li> -->
+      <li><a href="https://scholar.google.com/citations?user=nKxEiwgAAAAJ&amp;hl=en">Google Scholar</a></li>
+      <li><a href="https://github.com/hsleecri">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/hyeonsuleein/">LinkedIn</a></li>
+    </ul>
+  </div>
+  <div class="portrait"><img src="photo.jpg" alt="Portrait of Hyeonsu Lee" width="600" height="600"></div>
+</header>
+
+<section class="wrap row" id="about">
+  <h2>About</h2>
+  <div class="row-body">
+    <p>Hi! I'm a second-year Ph.D. student in the <a href="https://engineering.tamu.edu/industrial/index.html">Wm Michael Barnes ’64 Department of Industrial &amp; Systems Engineering</a> at Texas A&amp;M University, where I'm fortunate to be part of the <a href="https://www.jihoonjeong.com/home">Jeong Research Group</a>.</p>
+    <p>With a background in both mechanical and industrial engineering, I am driven to tackle practical challenges in manufacturing systems using machine learning (ML). Specifically, my research focuses on integrating domain knowledge into ML models and mitigating their training instability in real-world applications. Ultimately, I hope to pursue high-impact research that makes a meaningful contribution to the real world.</p>
+    <p>My research interests include:</p>
+    <div class="interests">
+      <div>
+        <h3 class="label">Applications</h3>
+        <ul>
+          <li>Advanced manufacturing</li>
+          <li>Process monitoring and control</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="label">Methodologies</h3>
+        <ul>
+          <li>Machine learning</li>
+          <li>Deep learning</li>
+          <li>Physics-informed neural networks</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap row" id="education">
+  <h2>Education</h2>
+  <div class="row-body">
+    <ul class="dated">
+      <li>
+        <span class="yr">2025–present</span>
+        <div>
+          <p class="what">Ph.D., Industrial and Systems Engineering</p>
+          <p class="where">Texas A&amp;M University, College Station, TX, USA</p>
+          <p class="where">Advisor: Prof. Jihoon Jeong</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2023–2025</span>
+        <div>
+          <p class="what">M.S., Industrial and Management Engineering</p>
+          <p class="where">Hanyang University, Seoul, South Korea</p>
+          <p class="where">Thesis: Adaptive Batch Size Determination in Dynamic Manufacturing Processes via a Nonstationary Hidden Markov Model</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2017–2023</span>
+        <div>
+          <p class="what">B.S., Mechanical Engineering<br>B.S., Industrial and Management Engineering (dual degree)</p>
+          <p class="where">Hanyang University ERICA, Ansan, South Korea</p>
+          <p class="where">Includes military service: Republic of Korea Army, Sergeant (2018–2020)</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap row" id="research">
+  <h2>Research</h2>
+  <div class="row-body">
+    <div class="theme">
+      <h3>Physics-informed machine learning for manufacturing systems</h3>
+      <ul class="theme-points">
+        <li>PINN surrogates for temperature fields in metal additive manufacturing (AM)</li>
+        <li>Generalization across process parameters, materials, and laser paths</li>
+        <li>Inverse modeling and more stable, effective, and efficient PINN optimization</li>
+      </ul>
+      <p class="related">Related: <a href="#p-matagnostic">Material-agnostic PINN</a> · <a href="#p-cfm">Adaptive sampling</a> · <a href="#p-multidomain">Multi-domain PINNs</a></p>
+    </div>
+    <div class="theme">
+      <h3>Data-driven process monitoring and control</h3>
+      <ul class="theme-points">
+        <li>Robust unsupervised anomaly detection under contaminated in-situ monitoring data</li>
+        <li>Real-time defect classification on edge devices</li>
+        <li>Multimodal sensor fusion to predict composition and hardness</li>
+        <li>Time-series classification and process-degradation modeling for adaptive control</li>
+      </ul>
+      <p class="related">Related: <a href="#p-robustad">Robust anomaly detection</a> · <a href="#p-edge">Edge defect classification</a> · <a href="#p-cuin718">Composition and hardness</a> · <a href="#p-hmm">Nonstationary HMM</a> · <a href="#p-tsimg">Time-series imaging</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap row" id="publications">
+  <h2>Publications<span class="count count-list"><span>2 published</span><span>4 under review</span><span>6 to be submitted</span></span></h2>
+  <div class="row-body">
+    <p class="legend"><span><sup>*</sup>Corresponding author</span><span><sup>#</sup>Equal contribution</span><span><sup>†</sup>Mentored student</span></p>
+    <h3 class="group">Published <span>2</span></h3>
+    <ul class="pubs">
+      <li class="pub" id="p-matagnostic">
+        <p class="pub-title"><a href="https://doi.org/10.1016/j.addma.2026.105289">Material-Agnostic Temperature Field Prediction in Metal Additive Manufacturing via a Parametric PINN Framework</a></p>
+        <p class="authors"><b>Lee, H.</b>, Jeong, J.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+        <div class="meta"><span><span class="venue">Additive Manufacturing</span> 127 (2026): 105289</span><a class="chip" href="https://doi.org/10.1016/j.addma.2026.105289">Paper</a><a class="chip" href="https://github.com/hsleecri/MaterialAgnosticTempPred">Code</a></div>
+        <p class="award"><span class="tag">IISE 2026</span><span>Best Student Paper Award Finalist, Manufacturing &amp; Design Division</span></p>
+      </li>
+      <li class="pub" id="p-tsimg">
+        <p class="pub-title"><a href="https://doi.org/10.3390/s25030621">Beyond Information Distortion: Imaging Variable-Length Time Series Data for Classification</a></p>
+        <p class="authors"><b>Lee, H.</b>, Shin, D.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+        <div class="meta"><span><span class="venue">Sensors</span> 25.3 (2025): 621</span><a class="chip" href="https://doi.org/10.3390/s25030621">Paper</a></div>
+      </li>
+    </ul>
+    <h3 class="group">Under review <span>4</span></h3>
+    <ul class="pubs">
+      <li class="pub" id="p-multidomain">
+        <p class="pub-title">Multi-Domain Physics-Informed Neural Networks for Thermal Modeling and Parameter Identification in Multi-Material Directed Energy Deposition</p>
+        <p class="authors">Jeong, J.<sup tabindex="0" data-tip="Equal contribution; corresponding author" aria-label="Equal contribution; corresponding author">#*</sup>, <b>Lee, H.</b><sup tabindex="0" data-tip="Equal contribution" aria-label="Equal contribution">#</sup>, Canacoo, S., Sakib, MN.</p>
+        <div class="meta"><span class="venue">CIRP Annals</span></div>
+      </li>
+      <li class="pub" id="p-robustad">
+        <p class="pub-title">Robust Unsupervised Anomaly Detection for Additive Manufacturing under In-Situ Monitoring Data Contamination</p>
+        <p class="authors"><b>Lee, H.</b>, Jeong, J.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+        <div class="meta"><span class="venue">Journal of Manufacturing Systems</span></div>
+      </li>
+      <li class="pub" id="p-cfm">
+        <p class="pub-title"><a href="https://arxiv.org/abs/2610.09126">Domain-Informed Adaptive Sampling for Generalizable PINNs in Metal Additive Manufacturing via Conditional Flow Matching</a></p>
+        <p class="authors"><b>Lee, H.</b>, Jeong, J.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+        <div class="meta"><span class="venue">IISE Transactions</span><a class="chip" href="https://arxiv.org/abs/2610.09126">arXiv</a><a class="chip" href="https://github.com/hsleecri/AdaptiveSamplingPINN-AM">Code</a></div>
+      </li>
+      <li class="pub" id="p-hmm">
+        <p class="pub-title">Adaptive Batch Size Control under Progressive Process Capability Degradation Using a Nonstationary HMM Framework</p>
+        <p class="authors"><b>Lee, H.</b>, Shin, D.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+        <div class="meta"><span class="venue">International Journal of Production Research</span></div>
+      </li>
+    </ul>
+    <h3 class="group">To be submitted <span>6</span></h3>
+    <ul class="pubs">
+      <li class="pub" id="p-procopt">
+        <p class="pub-title">Parametric Physics-Informed Neural Networks-Enabled Process Optimization for Directed Energy Deposition Metal Additive Manufacturing</p>
+        <p class="authors"><b>Lee, H.</b>, Sakib, MN., Canacoo, S., Jeong, J.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+      </li>
+      <li class="pub" id="p-cuin718">
+        <p class="pub-title">Predicting Composition and Hardness of Functionally Graded Walls from Multimodal In-Situ Monitoring Data</p>
+        <p class="authors">Canacoo, S.<sup tabindex="0" data-tip="Equal contribution" aria-label="Equal contribution">#</sup>, <b>Lee, H.</b><sup tabindex="0" data-tip="Equal contribution" aria-label="Equal contribution">#</sup>, Sakib, MN., Jeong, J.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+      </li>
+      <li class="pub" id="p-agentic">
+        <p class="pub-title">Physics-Informed Agentic AI Modeling for Metal Additive Manufacturing: Current Progress, Challenges, and Future Directions</p>
+        <p class="authors"><b>Lee, H.</b>, Jeong, J.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+      </li>
+      <li class="pub" id="p-edge">
+        <p class="pub-title">Real-Time Edge-Deployable Deep Learning Model for Defect Classification in Metal Additive Manufacturing</p>
+        <p class="authors">Stein, D.<sup tabindex="0" data-tip="Mentored student" aria-label="Mentored student">†</sup>, <b>Lee, H.</b>, Jeong, J.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+      </li>
+      <li class="pub" id="p-zeroshot">
+        <p class="pub-title">Generalizable PINN Surrogates for Thermal Modeling in Metal Additive Manufacturing: Zero-Shot Prediction across Laser Paths, Process Parameters, and Materials</p>
+        <p class="authors"><b>Lee, H.</b>, Jeong, J.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+      </li>
+      <li class="pub" id="p-advancing">
+        <p class="pub-title">Advancing Physics-Informed Neural Networks for a Physics-Informed Digital Twin of Directed Energy Deposition</p>
+        <p class="authors"><b>Lee, H.</b>, Sakib, MN., Canacoo, S., Jeong, J.<sup tabindex="0" data-tip="Corresponding author" aria-label="Corresponding author">*</sup></p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap row" id="presentations">
+  <h2>Presentations<span class="count">4 talks</span></h2>
+  <div class="row-body">
+    <ul class="dated">
+      <li>
+        <span class="yr">2026</span>
+        <div>
+          <p class="what">Domain-Informed Adaptive Sampling for PINNs in Metal Additive Manufacturing</p>
+          <p class="where"><b>Lee, H.</b>, Jeong, J.</p>
+          <p class="where">INFORMS Annual Meeting 2026</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2026</span>
+        <div>
+          <p class="what">Material-Agnostic Temperature Prediction in Metal Additive Manufacturing via Parametric Physics-Informed Neural Networks</p>
+          <p class="where"><b>Lee, H.</b>, Jeong, J.</p>
+          <p class="where">IISE Annual Conference &amp; Expo 2026, Arlington, TX, USA</p>
+          <p class="award"><span>Best Student Paper Award Finalist, Manufacturing &amp; Design Division</span></p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2026</span>
+        <div>
+          <p class="what">No More Manual Load on Data: Unsupervised, Robust, Multi-Scale Anomaly Detection of Melt Pool Monitoring Images in Metal Additive Manufacturing</p>
+          <p class="where"><b>Lee, H.</b>, Jeong, J.</p>
+          <p class="where">IISE Annual Conference &amp; Expo 2026, Arlington, TX, USA</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2023</span>
+        <div>
+          <p class="what">An Operator Task Model for Constructing Human-in-the-Loop Simulation in Manufacturing Systems</p>
+          <p class="where">Kim, B., Kim, G., <b>Lee, H.</b> (Presenter), Shin, D.</p>
+          <p class="where">15th International Conference on Internet, Ho Chi Minh City, Vietnam</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap row" id="honors">
+  <h2>Awards</h2>
+  <div class="row-body">
+    <ul class="dated">
+      <li>
+        <span class="yr">2026</span>
+        <div>
+          <p class="what">Best Student Paper Award Finalist</p>
+          <p class="where">Manufacturing &amp; Design Division, IISE Annual Conference &amp; Expo</p>
+          <p class="where">For <a href="#p-matagnostic">material-agnostic temperature prediction with parametric PINNs</a></p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2026</span>
+        <div>
+          <p class="what">Travel Awards</p>
+          <p class="where">Wm Michael Barnes ’64 Department of Industrial &amp; Systems Engineering, Texas A&amp;M University</p>
+          <p class="where">Graduate and Professional School, Texas A&amp;M University</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2022, 2023</span>
+        <div>
+          <p class="what">Academic Excellence Award</p>
+          <p class="where">Hanyang University ERICA</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2022</span>
+        <div>
+          <p class="what">Distinction Award (5th of 810)</p>
+          <p class="where">Innovation Idea &amp; Invention Design Competition, Korean Intellectual Property Office</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2021</span>
+        <div>
+          <p class="what">CEO Award (9th of 1,747)</p>
+          <p class="where">Campus Patent Universiade, Korean Intellectual Property Office and HD Hyundai Infracore</p>
+        </div>
+      </li>
+      <li>
+        <span class="yr">2018</span>
+        <div>
+          <p class="what">Winner (1st of 200+)</p>
+          <p class="where">Mechanical Engineering Departmental Competition, Hanyang University ERICA</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<footer class="wrap">Hyeonsu Lee · Texas A&amp;M University · Last updated November 2026</footer>
+
+<script>
+(function () {
+  // Copy e-mail: the address is assembled here so it never appears whole in the page text.
+  var btn = document.getElementById('copy-email');
+  var shown = document.getElementById('email-text');
+  var addr = ['hslee', 'tamu.edu'].join('@');
+  if (btn && shown) {
+    btn.addEventListener('click', function () {
+      var done = function (label) { btn.textContent = label; setTimeout(function () { btn.textContent = 'Copy'; }, 1800); };
+      var fallback = function () {
+        shown.textContent = addr;
+        var r = document.createRange(); r.selectNodeContents(shown);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        done('Selected');
+      };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(addr).then(function () { done('Copied'); }, fallback);
+        } else { fallback(); }
+      } catch (e) { fallback(); }
+    });
+  }
+
+  // Light / dark toggle: an explicit choice sets data-theme on <html>; with none, the system setting decides.
+  var root = document.documentElement;
+  var tbtn = document.getElementById('theme-toggle');
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function current() {
+    var t = root.getAttribute('data-theme');
+    if (t === 'dark' || t === 'light') return t;
+    return mq && mq.matches ? 'dark' : 'light';
+  }
+  function paint() {
+    var dark = current() === 'dark';
+    tbtn.querySelector('.to-dark').hidden = dark;
+    tbtn.querySelector('.to-light').hidden = !dark;
+    tbtn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+  }
+  if (tbtn) {
+    tbtn.addEventListener('click', function () {
+      var next = current() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+    if (mq && mq.addEventListener) mq.addEventListener('change', paint);
+    if ('MutationObserver' in window) new MutationObserver(paint).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    paint();
+  }
+})();
+</script>
+</body>
+</html>
